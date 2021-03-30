@@ -21,7 +21,7 @@ export class Article {
   description: string;
 
   @Column()
-  postedBy: string;
+  postedUserId: number;
 
   // 毎回これを書くのか？
   @CreateDateColumn({ type: 'timestamp', precision: 0 })
