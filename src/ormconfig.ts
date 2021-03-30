@@ -1,5 +1,5 @@
 import { ConnectionOptions } from 'typeorm';
-import TypeOrmNamingStrategy from './TypeOrmNamingStrategy';
+import { TypeOrmNamingStrategy } from './strategies/TypeOrmNamingStrategy';
 
 // You can load you .env file here synchronously using dotenv package (not installed here),
 // import * as dotenv from 'dotenv';

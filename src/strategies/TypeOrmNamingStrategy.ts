@@ -2,7 +2,7 @@ import pluralize, { plural } from 'pluralize';
 import { DefaultNamingStrategy } from 'typeorm';
 import { snakeCase } from 'typeorm/util/StringUtils';
 
-export default class TypeOrmNamingStrategy extends DefaultNamingStrategy {
+export class TypeOrmNamingStrategy extends DefaultNamingStrategy {
   tableName(className, customName) {
     return customName || plural(snakeCase(className));
   }
