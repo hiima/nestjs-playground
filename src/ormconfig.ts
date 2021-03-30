@@ -1,4 +1,5 @@
 import { ConnectionOptions } from 'typeorm';
+import TypeOrmNamingStrategy from './TypeOrmNamingStrategy';
 
 // You can load you .env file here synchronously using dotenv package (not installed here),
 // import * as dotenv from 'dotenv';
@@ -34,6 +35,8 @@ const config: ConnectionOptions = {
   cli: {
     migrationsDir: 'src/migrations',
   },
+
+  namingStrategy: new TypeOrmNamingStrategy(),
 };
 
 export = config;
