@@ -18,6 +18,10 @@ yarn typeorm:run
 
 # NestJS 開発サーバを起動 (port: 4000)
 yarn start:dev
+
+# なにか返ってくる
+curl --request GET --url http://localhost:4000/users
+curl --request GET --url http://localhost:4000/articles
 ```
 
 # マイグレーションについて
