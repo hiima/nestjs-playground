@@ -13,7 +13,8 @@ import { TypeOrmNamingStrategy } from './strategies/TypeOrmNamingStrategy';
 const config: ConnectionOptions = {
   type: 'postgres',
   host: 'localhost',
-  port: 5432,
+  // ここと db/docker-compose でポートをベタ書きしていて良くない
+  port: 45432,
   username: 'postgres',
   password: '',
   database: 'postgres',
