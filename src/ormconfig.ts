@@ -1,4 +1,4 @@
-import { ConnectionOptions } from 'typeorm';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import { TypeOrmNamingStrategy } from './strategies/TypeOrmNamingStrategy';
 
 // You can load you .env file here synchronously using dotenv package (not installed here),
@@ -9,8 +9,20 @@ import { TypeOrmNamingStrategy } from './strategies/TypeOrmNamingStrategy';
 // You can also make a singleton service that load and expose the .env file content.
 // ...
 
+// typeorm-seeding の seeds, factories オプションを設定するために拡張する
+interface ICustomConnectionOptions extends PostgresConnectionOptions {
+  readonly seeds?: string[];
+  readonly factories?: string[];
+  readonly cli?: {
+    migrationsDir?: string;
+    // cli オプションの中身も拡張する
+    seedersDir?: string;
+    factoriesDir?: string;
+  };
+}
+
 // Check typeORM documentation for more information.
-const config: ConnectionOptions = {
+const config: ICustomConnectionOptions = {
   type: 'postgres',
   host: 'localhost',
   // ここと db/docker-compose でポートをベタ書きしていて良くない
@@ -33,8 +45,11 @@ const config: ConnectionOptions = {
   // __dirname is either dist or src folder, meaning either
   // the compiled js in prod or the ts in dev
   migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
+  seeds: ['/seeders/**/*{.ts,.js}'],
   cli: {
     migrationsDir: 'src/migrations',
+    seedersDir: 'src/migrations/seeds',
+    factoriesDir: 'src/migrations/factories',
   },
 
   namingStrategy: new TypeOrmNamingStrategy(),
