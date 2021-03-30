@@ -22,10 +22,10 @@
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/ormconfig.ts",
     "typeorm:migrate": "npm run typeorm migration:generate -- -n",
     "typeorm:run": "npm run typeorm migration:run",
-    "db:build": "docker-compose -f db/docker-compose.yml -p nestjs-typeorm-migration build",
-    "db:up": "docker-compose -f db/docker-compose.yml -p nestjs-typeorm-migration up -d",
-    "db:logs": "docker-compose -f db/docker-compose.yml -p nestjs-typeorm-migration logs -f",
-    "db:stop": "docker-compose -f db/docker-compose.yml -p nestjs-typeorm-migration stop"
+    "db:build": "docker-compose -f db/docker-compose.yml -p $(basename $(pwd)) build",
+    "db:up": "docker-compose -f db/docker-compose.yml -p $(basename $(pwd)) up -d",
+    "db:logs": "docker-compose -f db/docker-compose.yml -p $(basename $(pwd)) logs -f",
+    "db:stop": "docker-compose -f db/docker-compose.yml -p $(basename $(pwd)) stop"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",
