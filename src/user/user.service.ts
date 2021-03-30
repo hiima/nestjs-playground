@@ -11,6 +11,7 @@ export class UserService {
   ) {}
 
   getUserList() {
-    return this.userRepository.find();
+    // relations に指定するのはテーブル名文字列だが、これを型安全にするには？
+    return this.userRepository.find({ relations: ['articles'] });
   }
 }
