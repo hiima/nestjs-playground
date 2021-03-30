@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Article {
@@ -16,4 +22,11 @@ export class Article {
 
   @Column()
   postedBy: string;
+
+  // 毎回これを書くのか？
+  @CreateDateColumn({ type: 'timestamp', precision: 0 })
+  readonly createdAt: Date;
+
+  @UpdateDateColumn({ type: 'timestamp', precision: 0 })
+  readonly updatedAt: Date;
 }
