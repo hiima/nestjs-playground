@@ -1,10 +1,5 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Article } from './article.entity';
 
 @Entity()
 export class User {
@@ -14,9 +9,6 @@ export class User {
   @Column()
   name: string;
 
-  @CreateDateColumn({ type: 'timestamp', precision: 0 })
-  readonly createdAt: Date;
-
-  @UpdateDateColumn({ type: 'timestamp', precision: 0 })
-  readonly updatedAt: Date;
+  @OneToMany(() => Article, (article) => article.user)
+  articles: Article[];
 }

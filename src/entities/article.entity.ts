@@ -1,10 +1,5 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './user.entity';
 
 @Entity()
 export class Article {
@@ -12,21 +7,8 @@ export class Article {
   id: number;
 
   @Column()
-  name: string;
+  url: string;
 
-  @Column({ default: 0 })
-  rating: number;
-
-  @Column()
-  description: string;
-
-  @Column()
-  postedUserId: number;
-
-  // 毎回これを書くのか？
-  @CreateDateColumn({ type: 'timestamp', precision: 0 })
-  readonly createdAt: Date;
-
-  @UpdateDateColumn({ type: 'timestamp', precision: 0 })
-  readonly updatedAt: Date;
+  @ManyToOne(() => User, (user) => user.articles)
+  user: User;
 }
