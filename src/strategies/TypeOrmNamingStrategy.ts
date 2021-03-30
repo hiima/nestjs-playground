@@ -1,4 +1,4 @@
-import pluralize, { plural } from 'pluralize';
+import { plural, singular } from 'pluralize';
 import { DefaultNamingStrategy } from 'typeorm';
 import { snakeCase } from 'typeorm/util/StringUtils';
 
@@ -19,9 +19,7 @@ export class TypeOrmNamingStrategy extends DefaultNamingStrategy {
   }
 
   joinColumnName(relationName, referencedColumnName) {
-    return snakeCase(
-      pluralize.singular(relationName) + '_' + referencedColumnName,
-    );
+    return snakeCase(singular(relationName) + '_' + referencedColumnName);
   }
 
   joinTableName(firstTableName, secondTableName) {
@@ -29,9 +27,7 @@ export class TypeOrmNamingStrategy extends DefaultNamingStrategy {
   }
 
   joinTableColumnName(tableName, propertyName, columnName) {
-    return snakeCase(
-      pluralize.singular(tableName) + '_' + (columnName || propertyName),
-    );
+    return snakeCase(singular(tableName) + '_' + (columnName || propertyName));
   }
 
   classTableInheritanceParentColumnName(
@@ -39,7 +35,7 @@ export class TypeOrmNamingStrategy extends DefaultNamingStrategy {
     parentTableIdPropertyName,
   ) {
     return snakeCase(
-      pluralize.singular(parentTableName) + '_' + parentTableIdPropertyName,
+      singular(parentTableName) + '_' + parentTableIdPropertyName,
     );
   }
 }
